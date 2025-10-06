@@ -42,7 +42,7 @@ Die App ist der mobile Client für das **StockSim-Backend (Flask API)** und wurd
 | **API** | Flask + SQLAlchemy |
 | **State Management** | React Hooks & Context |
 | **Datenpersistenz** | SecureStore für Tokens |
-| **Charts** | Recharts (Portfolio-Historie) |
+| **Charts** | Gifted Charts |
 | **Auth** | JWT-basierte Authentifizierung |
 | **Design** | Dark Mode mit grünen Akzenten (Finanz-Look) |
 
@@ -69,10 +69,8 @@ expo start
 ```
 
 Du kannst dann:
-
-    mit dem Expo Go App-Scanner (QR-Code) testen, oder
-
-    mit einem Android-Emulator oder physischem Gerät starten.
+- mit dem Expo Go App-Scanner (QR-Code) testen, oder
+- mit einem Android-Emulator oder physischem Gerät starten.
 
 
 
