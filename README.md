@@ -1,50 +1,79 @@
-# Welcome to your Expo app 👋
+# 📈 StockSim Mobile
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+**StockSim Mobile** ist eine vollwertige mobile App für **Lehrer und Schüler**, um den **Börsenhandel realitätsnah zu simulieren**.  
+Schüler lernen spielerisch, wie Märkte funktionieren – Lehrer verwalten Schüler, verteilen Kapital und beobachten deren Fortschritt.
 
-## Get started
+Die App ist der mobile Client für das **StockSim-Backend (Flask API)** und wurde mit **React Native / Expo** entwickelt.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## 🚀 Funktionen
 
-2. Start the app
+### 👨‍🎓 Schüler-Interface
+- **Login mit Lehrerkennung**  
+  Jeder Schüler gehört zu einem Lehrer und kann sich nur über dessen Benutzername einloggen.
+- **Virtuelles Trading-System**  
+  Kaufen und Verkaufen von Aktien zu Live-Preisen (bzw. simulierten Kursen über die API).
+- **Portfolio-Ansicht**  
+  Zeigt alle gehaltenen Aktien, aktuelle Werte, Einstandspreise und Gewinne/Verluste.
+- **Portfolio-Historie**  
+  Visualisiert den Verlauf des Gesamtvermögens über die Zeit mit Diagrammen.
+- **Live-Dashboard**  
+  Übersicht über verfügbares Kapital, investiertes Kapital und aktuelle Performance.
 
-   ```bash
-   npx expo start
-   ```
+### 👩‍🏫 Lehrer-Interface
+- **Login für Lehrer oder Administratoren**  
+  Zugriff auf alle eigenen Schüler.
+- **Schülerverwaltung**  
+  - Schüler hinzufügen (mit Startkapital)  
+  - Schüler löschen  
+  - Passwort ändern  
+  - Guthaben aufladen
+- **Einblicke in Schüler-Portfolios**  
+  Lehrer können die Bestände und Performance jedes Schülers in Echtzeit einsehen.
 
-In the output, you'll find options to open the app in a
+---
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+## ⚙️ Technische Übersicht
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+| Komponente | Beschreibung |
+|-------------|--------------|
+| **Frontend** | React Native (Expo) |
+| **API** | Flask + SQLAlchemy |
+| **State Management** | React Hooks & Context |
+| **Datenpersistenz** | SecureStore für Tokens |
+| **Charts** | Recharts (Portfolio-Historie) |
+| **Auth** | JWT-basierte Authentifizierung |
+| **Design** | Dark Mode mit grünen Akzenten (Finanz-Look) |
 
-## Get a fresh project
+---
 
-When you're ready, run:
+## 🧠 Setup & Entwicklung
 
+### 1. Repository klonen
 ```bash
-npm run reset-project
+git clone https://github.com/<deinname>/stocksim-mobile.git
+cd stocksim-mobile
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Abhängigkeiten installieren
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+### 3. App starten (lokal)
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+expo start
+```
 
-## Join the community
+Du kannst dann:
 
-Join our community of developers creating universal apps.
+    mit dem Expo Go App-Scanner (QR-Code) testen, oder
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+    mit einem Android-Emulator oder physischem Gerät starten.
+
+
+
+
