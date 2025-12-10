@@ -1,9 +1,11 @@
-import { View, Text, StyleSheet, ActivityIndicator, ScrollView, TouchableOpacity, TextInput } from 'react-native';
+import { View, Text, StyleSheet, ActivityIndicator, TouchableOpacity, TextInput } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import PerformanceChart from './performanceChart';
 import { useAuth } from '../lib/AuthContext';
 import { useState, useEffect } from 'react';
 import { useWindowDimensions } from 'react-native';
+
+import { API_BASE_URL } from '../lib/constants';
 
 export default function StockDetail({ id, setModalVisible }) {
     const { width: windowWidth } = useWindowDimensions();
@@ -31,7 +33,7 @@ export default function StockDetail({ id, setModalVisible }) {
         const fetchData = async () => {
             setLoading(true);
             try {
-                const stockRes = await fetch(`http://192.168.1.107:5001/api/stocks/${id}`, {
+                const stockRes = await fetch(`${API_BASE_URL}/stocks/${id}`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -49,7 +51,7 @@ export default function StockDetail({ id, setModalVisible }) {
                 const stockJson = await stockRes.json();
                 setStockData(stockJson);
 
-                const dashboardRes = await fetch(`http://192.168.1.107:5001/api/student/dashboard`, {
+                const dashboardRes = await fetch(`${API_BASE_URL}/student/dashboard`, {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -92,7 +94,7 @@ export default function StockDetail({ id, setModalVisible }) {
         }
 
         try {
-            const res = await fetch(`http://192.168.1.107:5001/api/stocks/${id}/${type}`, {
+            const res = await fetch(`${API_BASE_URL}/stocks/${id}/${type}`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -146,10 +148,13 @@ export default function StockDetail({ id, setModalVisible }) {
                     ) : null}
                     <Text style={styles.stockTitle}>{stockData.name}</Text>
                     <Text style={styles.stockPrice}>${stockData.current_price}</Text>
+
                     <Text style={[styles.stockChange, { color: (((stockData.current_price - (history.slice(-5).reduce((sum, val) => sum + val.value, 0)) / 5) / stockData.current_price * 100 < 0 ? '#FF6B6B' : '#8EC57C')) }]}>
                         {(((stockData.current_price - (history.slice(-5).reduce((sum, val) => sum + val.value, 0)) / 5) / stockData.current_price * 100) < 0 ? '' : '+')}
                         {(((stockData.current_price - (history.slice(-5).reduce((sum, val) => sum + val.value, 0)) / 5) / stockData.current_price * 100).toFixed(2))}%
                     </Text>
+
+                    
                     <View style={styles.transactionsContainer}>
                         <TouchableOpacity style={[styles.transactionButton, { backgroundColor: '#5C48DF' }]} onPress={() => handleTransaction('buy')}>
                             <Text style={styles.transactionButtonText}>Buy</Text>
@@ -198,7 +203,7 @@ export default function StockDetail({ id, setModalVisible }) {
                             <Text style={styles.infoValue}>{stockData.shares}</Text>
                         </View>
                         <View style={styles.infoItem}>
-                            <Text style={styles.infoLabel}>Shares After Purchase:</Text>
+                            <Text style={styles.infoLabel} textBreakStrategy="simple">Shares After Purchase:</Text>
                             <Text style={styles.infoValue}>{(parseFloat(stockData.shares) + parseFloat(quantity)).toFixed(0)}</Text>
                         </View>
                         <View style={styles.infoItem}>
@@ -246,6 +251,7 @@ const styles = StyleSheet.create({
         paddingTop: 20,
         paddingBottom: 10,
         marginBottom: 20,
+        fontFamily: "System",
     },
     backIcon: {
         paddingVertical: 5,
@@ -266,23 +272,29 @@ const styles = StyleSheet.create({
     },
     messageText: {
         fontSize: 14,
+        fontFamily: "System",
     },
     title: {
         marginLeft: 30,
         fontSize: 18,
         fontWeight: 'bold',
         color: 'white',
+        fontFamily: "System",
     },
     stockTitle: {
+        width: '100%',
+        textAlign: 'center',
         fontSize: 24,
         fontWeight: 'bold',
         color: 'white',
         marginBottom: 20,
+        fontFamily: "System",
     },
     stockPrice: {
         fontSize: 42,
         color: 'white',
         marginBottom: 5,
+        fontFamily: 'System',
     },
     stockChange: {
         fontSize: 14,
@@ -291,6 +303,7 @@ const styles = StyleSheet.create({
         paddingVertical: 5,
         paddingHorizontal: 10,
         borderRadius: 50,
+        fontFamily: "System",
     },
     transactionsContainer: {
         flexDirection: 'row',
@@ -311,6 +324,7 @@ const styles = StyleSheet.create({
     transactionButtonText: {
         color: 'white',
         fontSize: 16,
+        fontFamily: "System",
     },
     buyerInfoContainer: {
         width: '100%',
@@ -331,12 +345,14 @@ const styles = StyleSheet.create({
         color: '#B1B3B4',
         fontSize: 14,
         marginBottom: 10,
+        fontFamily: "System",
     },
     buyerInfoInput: {
         color: 'white',
         fontSize: 24,
         fontWeight: 'bold',
         outlineColor: 'transparent',
+        padding: 0,
     },
     buyerInfoValue: {
         color: 'white',
@@ -358,10 +374,12 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     infoLabel: {
-        color: 'white',
+        fontFamily: 'System',
+        color: '#B1B3B4',
         fontSize: 14,
     },
     infoValue: {
+        fontFamily: 'System',
         color: 'white',
         fontSize: 14,
     },

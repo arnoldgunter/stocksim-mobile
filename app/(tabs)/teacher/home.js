@@ -7,6 +7,8 @@ import { useEffect, useState, useCallback } from 'react';
 import { LinearGradient } from 'expo-linear-gradient';
 import StudentDetail from '../../../components/studentDetail';
 
+import { API_BASE_URL } from '../../../lib/constants';
+
 export default function Home() {
   const router = useRouter();
 
@@ -43,7 +45,7 @@ export default function Home() {
     try {
       if (!refreshing) setLoading(true);
 
-      const studentsRes = await fetch("http://192.168.1.107:5001/api/teacher/students", {
+      const studentsRes = await fetch(`${API_BASE_URL}/teacher/students`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -140,7 +142,7 @@ export default function Home() {
               <TouchableOpacity key={student.student_id} onPress={() => handleStudentPress(student.student_id)}>
                 <View style={styles.studentContainer}>
                   <Ionicons name="person" size={24} color="white" />
-                  <Text style={styles.studentName}>{student.student_username}</Text>
+                  <Text numberOfLines={1} style={styles.studentName}>{student.student_username}</Text>
                 </View>
               </TouchableOpacity>
             ))
@@ -201,6 +203,7 @@ const styles = StyleSheet.create({
 
   messageText: {
     fontSize: 14,
+    fontFamily: "System",
   },
 
   header: {
@@ -212,6 +215,7 @@ const styles = StyleSheet.create({
     paddingTop: 20,
     paddingBottom: 10,
     marginBottom: 20,
+    fontFamily: "System",
   },
   backIcon: {
     paddingVertical: 5,
@@ -224,6 +228,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: "System",
   },
 
   searchInput: {
@@ -236,6 +241,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 20,
     color: 'white',
+    fontFamily: "System",
   },
 
   studentContainer: {
@@ -253,8 +259,9 @@ const styles = StyleSheet.create({
 
   studentName: {
     fontSize: 20,
-    fontWeight: 'bold',
     color: 'white',
+    fontFamily: "System",
+    maxWidth: '90%',
   },
 
   logoutButton: {
@@ -275,6 +282,7 @@ const styles = StyleSheet.create({
 
   logoutText: {
     color: 'white',
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: "System",
   }
 });

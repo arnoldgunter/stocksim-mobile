@@ -4,6 +4,8 @@ import { useAuth } from '../lib/AuthContext';
 import { useState, useEffect } from 'react';
 import PerformanceChart from './performanceChart';
 
+import { API_BASE_URL } from '../lib/constants';
+
 export default function StudentDetail({ username, password, funds, id }) {
     const { width: windowWidth } = useWindowDimensions();
 
@@ -29,7 +31,7 @@ export default function StudentDetail({ username, password, funds, id }) {
 
     const handlePasswordChange = async () => {
         try {
-            const response = await fetch(`http://192.168.1.107:5001/api/teacher/student/${id}/change-password`, {
+            const response = await fetch(`${API_BASE_URL}/teacher/student/${id}/change-password`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -63,7 +65,7 @@ export default function StudentDetail({ username, password, funds, id }) {
 
     const handleFundAdd = async () => {
         try {
-            const response = await fetch(`http://192.168.1.107:5001/api/teacher/student/${id}/add-funds`, {
+            const response = await fetch(`${API_BASE_URL}/teacher/student/${id}/add-funds`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -107,7 +109,7 @@ export default function StudentDetail({ username, password, funds, id }) {
                     text: 'Confirm',
                     onPress: async () => {
                         try {
-                            const response = await fetch(`http://192.168.1.107:5001/api/teacher/delete-student/${id}`, {
+                            const response = await fetch(`${API_BASE_URL}/teacher/delete-student/${id}`, {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json',
@@ -138,14 +140,14 @@ export default function StudentDetail({ username, password, funds, id }) {
             ],
             { cancelable: false }
         );
-        
+
     };
 
     const fetchPortfolioData = async () => {
         try {
             setLoading(true);
 
-            const portfolioRes = await fetch(`http://192.168.1.107:5001/api/teacher/student-portfolio/${id}`, {
+            const portfolioRes = await fetch(`${API_BASE_URL}/teacher/student-portfolio/${id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -296,6 +298,7 @@ const styles = StyleSheet.create({
     },
     messageText: {
         fontSize: 14,
+        fontFamily: "System",
     },
     avatarContainer: {
         alignItems: 'center',
@@ -306,16 +309,19 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
         marginBottom: 10,
+        fontFamily: "System",
     },
     text: {
         fontSize: 24,
         color: 'white',
         marginBottom: 10,
+        fontFamily: "System",
     },
     label: {
         fontSize: 16,
         color: '#B1B3B4',
         marginBottom: 5,
+        fontFamily: "System",
     },
     textInput: {
         width: '100%',
@@ -326,6 +332,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         marginBottom: 10,
         color: 'white',
+        fontFamily: "System",
     },
     setPasswordButton: {
         width: '100%',
@@ -341,6 +348,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         color: 'white',
         marginLeft: 10,
+        fontFamily: "System",
     },
 
     deleteStudentButton: {
@@ -384,6 +392,7 @@ const styles = StyleSheet.create({
     stockTitle: {
         fontSize: 14,
         color: '#B1B3B4',
+        fontFamily: "System",
     },
 
     stockSymbol: {
@@ -391,6 +400,7 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         color: 'white',
         marginBottom: 10,
+        fontFamily: "System",
     },
 
     stockValueContainer: {
@@ -402,10 +412,12 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: 'bold',
         color: 'white',
+        fontFamily: "System",
     },
 
     stockChange: {
         fontSize: 15,
         color: '#B1B3B4',
+        fontFamily: "System",
     },
 });

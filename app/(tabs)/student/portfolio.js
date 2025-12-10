@@ -20,6 +20,8 @@ import { useAuth } from '../../../lib/AuthContext';
 import { useRouter } from 'expo-router';
 import { PieChart } from 'react-native-gifted-charts';
 
+import { API_BASE_URL } from '../../../lib/constants';
+
 
 export default function Portfolio() {
   const router = useRouter();
@@ -58,7 +60,7 @@ export default function Portfolio() {
     try {
       if (!refreshing) setLoading(true);
 
-      const portfolioRes = await fetch("http://192.168.1.107:5001/api/student/portfolio-history", {
+      const portfolioRes = await fetch(`${API_BASE_URL}/student/portfolio-history`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -76,7 +78,7 @@ export default function Portfolio() {
       const portfolioJson = await portfolioRes.json();
       setPortfolioData(portfolioJson);
 
-      const stocksRes = await fetch("http://192.168.1.107:5001/api/student/stocks", {
+      const stocksRes = await fetch(`${API_BASE_URL}/student/stocks`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -94,7 +96,7 @@ export default function Portfolio() {
       const stocksJson = await stocksRes.json();
       setStudentStocks(stocksJson);
 
-      const dashBoardRes = await fetch("http://192.168.1.107:5001/api/student/dashboard", {
+      const dashBoardRes = await fetch(`${API_BASE_URL}/student/dashboard`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -301,6 +303,7 @@ const styles = StyleSheet.create({
 
   messageText: {
     fontSize: 14,
+    fontFamily: "System",
   },
 
   title: {
@@ -309,6 +312,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 20,
     marginBottom: 30,
+    fontFamily: "System",
   },
 
   dashboardInfoContainer: {
@@ -321,6 +325,7 @@ const styles = StyleSheet.create({
     width: '100%',
     fontSize: 14,
     color: '#B1B3B4',
+    fontFamily: "System",
   },
 
   value: {
@@ -329,6 +334,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     marginBottom: 20,
+    fontFamily: "System",
   },
 
   cardContainer: {
@@ -343,6 +349,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 20,
+    fontFamily: "System",
   },
 
   legendContainer: {
@@ -364,8 +371,8 @@ const styles = StyleSheet.create({
   legendLabel: {
     color: "white",
     fontSize: 14,
+    fontFamily: "System",
   },
-
 
   searchInput: {
     width: '100%',
@@ -376,6 +383,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 10,
     color: 'white',
+    fontFamily: "System",
   },
 
   stockCard: {
@@ -400,6 +408,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     maxWidth: '60%',
+    fontFamily: "System",
   },
 
   stockValueContainer: {
@@ -411,11 +420,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: "System",
   },
 
   stockChange: {
     fontSize: 15,
     color: '#B1B3B4',
+    fontFamily: "System",
   },
 
   logoutButton: {
@@ -433,6 +444,8 @@ const styles = StyleSheet.create({
 
   logoutText: {
     color: 'white',
-    fontSize: 16
+    fontSize: 16,
+    width: 'fit-content',
+    fontFamily: "System",
   }
 });

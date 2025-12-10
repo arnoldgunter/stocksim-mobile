@@ -5,6 +5,8 @@ import { useAuth } from '../../../lib/AuthContext';
 import StockDetail from '../../../components/stockDetail';
 import { LinearGradient } from 'expo-linear-gradient';
 
+import { API_BASE_URL } from '../../../lib/constants';
+
 export default function Settings() {
   const { token } = useAuth();
   const { width: windowWidth } = useWindowDimensions();
@@ -30,7 +32,7 @@ export default function Settings() {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('http://192.168.1.107:5001/api/stocks/all', {
+        const response = await fetch(`${API_BASE_URL}/stocks/all`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -142,6 +144,7 @@ const styles = StyleSheet.create({
     color: 'white',
     marginTop: 20,
     marginBottom: 30,
+    fontFamily: "System",
   },
   searchInput: {
     width: '100%',
@@ -152,6 +155,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 10,
     color: 'white',
+    fontFamily: "System",
   },
   cardContainer: {
     width: '100%',
@@ -178,11 +182,13 @@ const styles = StyleSheet.create({
   stockName: {
     flexDirection: 'column',
     maxWidth: '60%',
+    fontFamily: "System",
   },
 
   stockTitle: {
     fontSize: 14,
     color: '#B1B3B4',
+    fontFamily: "System",
   },
 
   stockSymbol: {
@@ -190,12 +196,14 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 10,
+    fontFamily: "System",
   },
 
   stockValue: {
     fontSize: 15,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: "System",
   },
 
 });

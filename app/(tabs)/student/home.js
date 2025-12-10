@@ -17,6 +17,8 @@ import PerformanceChart from '../../../components/performanceChart';
 import StockDetail from '../../../components/stockDetail';
 import { useAuth } from '../../../lib/AuthContext';
 
+import { API_BASE_URL } from '../../../lib/constants';
+
 export default function Home() {
   const { token } = useAuth();
 
@@ -43,7 +45,7 @@ export default function Home() {
     try {
       if (!refreshing) setLoading(true);
 
-      const portfolioRes = await fetch("http://192.168.1.107:5001/api/student/portfolio-history", {
+      const portfolioRes = await fetch(`${API_BASE_URL}/student/portfolio-history`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -62,7 +64,7 @@ export default function Home() {
       setPortfolioData(portfolioJson);
 
       // Student Stocks laden
-      const stocksRes = await fetch("http://192.168.1.107:5001/api/student/stocks", {
+      const stocksRes = await fetch(`${API_BASE_URL}/student/stocks`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -104,14 +106,15 @@ export default function Home() {
     setModalVisible(true);
   };
 
-  if (loading || !portfolioData.length || !studentStocks.length) {
-    setTimeout(() => {
+  if (loading) {
       return (
         <SafeAreaView style={[styles.container, { justifyContent: 'center' }]} edges={['top']}>
           <ActivityIndicator size="large" color="white" />
         </SafeAreaView>
       );
-    }, 3000);
+    }
+
+    if (!portfolioData.length || !studentStocks.length) {
     return (
       <SafeAreaView style={[styles.container, { justifyContent: 'center', alignItems: 'center' }]} edges={['top']}>
         <ScrollView
@@ -125,7 +128,6 @@ export default function Home() {
         </ScrollView>
       </SafeAreaView>
     )
-
   }
 
   return (
@@ -243,6 +245,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     marginBottom: 10,
+    marginLeft: 20,
+    fontFamily: "System",
   },
 
   stockCard: {
@@ -267,6 +271,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: 'white',
     maxWidth: '60%',
+    fontFamily: "System",
   },
 
   stockValueContainer: {
@@ -278,11 +283,13 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: "System",
   },
 
   stockChange: {
     fontSize: 15,
     color: '#B1B3B4',
+    fontFamily: "System",
   },
 });
 

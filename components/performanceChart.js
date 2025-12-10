@@ -1,9 +1,8 @@
-import { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, useWindowDimensions, TouchableOpacity } from 'react-native';
 import { LineChart } from 'react-native-gifted-charts';
 
-
-export default function PerformanceChart({ data, width, height, span }) {
+const PerformanceChart = ({ data, width, height, span }) => {
     const { width: windowWidth } = useWindowDimensions();
     const [timeSpan, setTimeSpan] = useState(span || "1D");
 
@@ -85,7 +84,6 @@ export default function PerformanceChart({ data, width, height, span }) {
                 )}
             </View>
 
-
             <View style={styles.radioButtonContainer}>
                 {["1D", "1W", "1M", "1Y", "ALL"].map(span => (
                     <TouchableOpacity
@@ -93,17 +91,19 @@ export default function PerformanceChart({ data, width, height, span }) {
                         style={[styles.radioButton, timeSpan === span && { backgroundColor: '#5C48DF' }]}
                         onPress={() => setTimeSpan(span)}
                     >
-                        <Text style={[styles.radioButtonText, timeSpan === span && { color: 'white' }]}>{span}</Text>
+                        <Text numberOfLines={1} style={[styles.radioButtonText, timeSpan === span && { color: 'white' }]}>{span}</Text>
                     </TouchableOpacity>
                 ))}
             </View>
         </>
     );
-}
+};
+
+export default React.memo(PerformanceChart);
 
 const styles = StyleSheet.create({
     xLabelContainer: { flexDirection: 'row', justifyContent: 'space-between', paddingLeft: 30, width: '100%' },
-    xLabel: { fontSize: 12, color: '#B1B3B4' },
+    xLabel: { fontSize: 12, color: '#B1B3B4', fontFamily: "System" },
     radioButtonContainer: {
         width: "90%",
         flexDirection: "row",
@@ -124,5 +124,5 @@ const styles = StyleSheet.create({
         height: 45,
         borderRadius: 50,
     },
-    radioButtonText: { fontSize: 14, color: "#B1B3B4" },
+    radioButtonText: { fontSize: 14, color: "#B1B3B4", width: '100%', textAlign: 'center', fontFamily: "System"},
 });

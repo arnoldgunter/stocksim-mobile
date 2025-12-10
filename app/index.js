@@ -7,6 +7,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { useAuth } from "../lib/AuthContext";
+import { API_BASE_URL } from '../lib/constants';
 
 
 export default function Login() {
@@ -51,7 +52,7 @@ export default function Login() {
             password: passwordTeacher,
           };
 
-      const res = await fetch(`http://192.168.1.107:5001/api/auth/${role}/login`, {
+      const res = await fetch(`${API_BASE_URL}/auth/${role}/login`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
@@ -128,7 +129,7 @@ export default function Login() {
               placeholderTextColor={"#B1B3B4"}
               autoCapitalize="none"
               autoCorrect={false}
-              value={userNameStudent}
+              value={userNameStudent.trim()}
               onChangeText={setUserNameStudent}
             />
             <TextInput
@@ -138,7 +139,7 @@ export default function Login() {
               secureTextEntry
               autoCapitalize="none"
               autoCorrect={false}
-              value={passwordStudent}
+              value={passwordStudent.trim()}
               onChangeText={setPasswordStudent}
             />
             <TextInput
@@ -147,7 +148,7 @@ export default function Login() {
               placeholderTextColor={"#B1B3B4"}
               autoCapitalize="none"
               autoCorrect={false}
-              value={teacherName}
+              value={teacherName.trim()}
               onChangeText={setTeacherName}
             />
           </>
@@ -159,7 +160,7 @@ export default function Login() {
               placeholderTextColor={"#B1B3B4"}
               autoCapitalize="none"
               autoCorrect={false}
-              value={userNameTeacher}
+              value={userNameTeacher.trim()}
               onChangeText={setUserNameTeacher}
             />
             <TextInput
@@ -169,7 +170,7 @@ export default function Login() {
               secureTextEntry
               autoCapitalize="none"
               autoCorrect={false}
-              value={passwordTeacher}
+              value={passwordTeacher.trim()}
               onChangeText={setPasswordTeacher}
             />
             <View style={styles.registerContainer}>
@@ -210,7 +211,8 @@ const styles = StyleSheet.create({
     color: "white",
     textAlign: "center",
     fontSize: 24,
-    marginVertical: "20%",
+    marginVertical: 50,
+    fontFamily: "System",
   },
   radioContainer: {
     width: "100%",
@@ -235,6 +237,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#ffffff",
     fontWeight: "bold",
+    fontFamily: "System",
   },
   input: {
     width: "100%",
@@ -260,6 +263,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     color: "red",
     textAlign: "center",
+    fontFamily: "System",
   },
   registerContainer: {
     flexDirection: "row",
@@ -271,8 +275,10 @@ const styles = StyleSheet.create({
   },
   registerText: {
     color: "#B1B3B4",
+    fontFamily: "System",
   },
   registerLink: {
     color: "#5C48DF",
+    fontFamily: "System",
   },
 });

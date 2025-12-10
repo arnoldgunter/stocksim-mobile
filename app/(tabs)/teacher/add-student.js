@@ -4,6 +4,8 @@ import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../../../lib/AuthContext';
 import { useState } from 'react';
 
+import { API_BASE_URL } from '../../../lib/constants';
+
 export default function AddStudent() {
 
   const { token } = useAuth();
@@ -24,7 +26,7 @@ export default function AddStudent() {
 
   const handleAddStudent = async () => {
     try {
-      const response = await fetch(`http://192.168.1.107:5001/api/teacher/add-student`, {
+      const response = await fetch(`${API_BASE_URL}/teacher/add-student`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -134,6 +136,7 @@ const styles = StyleSheet.create({
 
   messageText: {
     fontSize: 14,
+    fontFamily: "System",
   },
 
   header: {
@@ -151,6 +154,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 'bold',
     color: 'white',
+    fontFamily: "System",
   },
 
   userInput: {
@@ -162,12 +166,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginTop: 10,
     color: 'white',
+    fontFamily: "System",
   },
 
   text: {
     color: 'white',
     fontSize: 16,
-    marginTop: 10
+    marginTop: 10,
+    fontFamily: "System",
   },
 
   divider: {
@@ -196,6 +202,7 @@ const styles = StyleSheet.create({
 
   addText: {
     color: 'white',
-    fontSize: 16
+    fontSize: 16,
+    fontFamily: "System",
   }
 });
